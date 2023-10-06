@@ -87,8 +87,6 @@ function showCard(){
 function compareCards(){
     const cardOne = clickedCards[0];
     const cardTwo = clickedCards[1];
-    attempts++;
-    attempt.innerText = attempts;
     if (cardOne === cardTwo){
         clickedCards.pop();
     } else if (cardOne !== cardTwo && cardOne.attributes.src.value === cardTwo.attributes.src.value){
@@ -96,6 +94,7 @@ function compareCards(){
         cardTwo.removeEventListener('click', showCard);
         correctCards.push(cardOne, cardTwo);
         clickedCards = [];
+        attempts++;
         if (correctCards.length === cards.length) {
             gameOver();
         }
@@ -107,15 +106,18 @@ function compareCards(){
             cardTwo.setAttribute('class', 'hidden');
         }, 500);
         clickedCards = [];
+        attempts++;
     }
+    attempt.innerText = attempts;
 }
 
 function gameOver(){
     score.innerText = 'You win!!';
-    // attempt.innerText = attempts;
     again.removeAttribute('hidden')
 }
 
 again.addEventListener('click', function(){
     location.reload();
 });
+
+attempt.innerText = attempts;
